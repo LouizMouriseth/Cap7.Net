@@ -1,0 +1,31 @@
+name: "consumo-energia"
+services:
+  ener-api:
+    container_name: ener-api
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+    depends_on:
+      - ener-sql-server
+
+  ener-sql-server:
+    container_name: ener-sql-server
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: on-failure
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "SenhaBanco!1"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+  
+volumes:
+  sqlserverdata:
