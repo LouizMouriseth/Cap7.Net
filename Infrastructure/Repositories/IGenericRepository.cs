@@ -7,6 +7,7 @@ public interface IGenericRepository<T>
     Task AddAsync(T entity, CancellationToken cancellationToken);
 
     Task<(List<T> data, int total)> ListAllAsync(
+        IQueryable<T>? query = null,
         Expression<Func<T, bool>>? filters = null,
         Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
         int page = 1,

@@ -70,4 +70,23 @@ public class UnidadesController : Controller
         return await _mediator.Send(request);
     }
 
+    /// <summary>
+    /// Lista unidades com maior eficiência energética, baseado em área e último consumo
+    /// </summary>
+    /// <response code="200">Uma lista com 3 unidades e seus respectivos últimos consumos</response>
+    [HttpGet]
+    [Route("MoreEfficient")]
+    [ProducesResponseType(typeof(DataResponse<List<MoreEfficient.ViewModel>>), StatusCodes.Status200OK)]
+    public async Task<BaseResponse<List<MoreEfficient.ViewModel>>> ListMoreEfficient()
+        => await _mediator.Send(new MoreEfficient.Request());
+    
+    /// <summary>
+    /// Lista unidades com menor eficiência energética, baseado em área e último consumo
+    /// </summary>
+    /// <response code="200">Uma lista com 3 unidades e seus respectivos últimos consumos</response>
+    [HttpGet]
+    [Route("LessEfficient")]
+    [ProducesResponseType(typeof(DataResponse<List<LessEfficient.ViewModel>>), StatusCodes.Status200OK)]
+    public async Task<BaseResponse<List<LessEfficient.ViewModel>>> ListLessEfficient()
+        => await _mediator.Send(new LessEfficient.Request());
 }

@@ -22,6 +22,7 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : Gen
     }
 
     public async Task<(List<T> data, int total)> ListAllAsync(
+            IQueryable<T>? query = null,
             Expression<Func<T, bool>>? filters = null,
             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
             int page = 1,
@@ -31,7 +32,7 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : Gen
             CancellationToken ct = default
         )
     {
-        var query = (IQueryable<T>)_entity;
+        query ??= _entity;
             
         if (noTrack)
             query = query.AsNoTracking();
