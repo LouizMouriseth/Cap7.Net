@@ -43,3 +43,7 @@ app.UseHttpsRedirection();
 app.UseCors("AnyOrigin");
 
 app.Run();
+
+public partial class Program
+{
+}

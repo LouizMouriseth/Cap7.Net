@@ -1,6 +1,7 @@
 using Application.SeedWork.Responses;
 using Application.Acao;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -21,6 +22,7 @@ public class AcoesController : Controller
     /// </summary>
     /// <response code="200">Uma lista de ações</response>
     [HttpGet]
+    [Authorize]
     [ProducesResponseType(typeof(PaginatedResponse<ListAll.ViewModel>), StatusCodes.Status200OK)]
     public async Task<BaseResponse<ListAll.ViewModel>> List([FromQuery] ListAll.Request request)
         => await _mediator.Send(request);
@@ -32,6 +34,7 @@ public class AcoesController : Controller
     /// <response code="201">Retorna a ação criada</response>
     /// <response code="422">Um ou mais parâmetros estão ausentes ou incorretos</response>
     [HttpPost]
+    [Authorize]
     [ProducesResponseType(typeof(DataResponse<Create.ViewModel>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ErrorListResponse<>), StatusCodes.Status422UnprocessableEntity)]
     public async Task<BaseResponse<Create.ViewModel>> Create([FromBody] Create.Request request)
@@ -46,6 +49,7 @@ public class AcoesController : Controller
     /// <response code="404">Ação não encontrada</response>
     /// <response code="422">Um ou mais parâmetros estão ausentes ou incorretos</response>
     [HttpPut("{id:guid}")]
+    [Authorize]
     [ProducesResponseType(typeof(DataResponse<Update.ViewModel>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(NoDataResponse<>), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorListResponse<>), StatusCodes.Status422UnprocessableEntity)]
@@ -62,6 +66,7 @@ public class AcoesController : Controller
     /// <response code="200">Ação excluída</response>
     /// <response code="404">Ação não encontrada</response>
     [HttpDelete("{id:guid}")]
+    [Authorize]
     [ProducesResponseType(typeof(NoDataResponse<Delete.ViewModel>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(NoDataResponse<>), StatusCodes.Status404NotFound)]
     public async Task<BaseResponse<Delete.ViewModel>> Delete([FromRoute] Guid id)

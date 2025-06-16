@@ -1,0 +1,4157 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Acoes": {
+      "get": {
+        "tags": [
+          "Acoes"
+        ],
+        "summary": "Lista todas as ações",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uma lista de ações",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.Acao.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.Acao.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.Acao.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Acoes"
+        ],
+        "summary": "Cria uma ação",
+        "requestBody": {
+          "description": "Dados da ação",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Acao.Create.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Acao.Create.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Acao.Create.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Acao.Create.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Retorna a ação criada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Acao.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Acao.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Acao.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Um ou mais parâmetros estão ausentes ou incorretos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Acoes/{id}": {
+      "put": {
+        "tags": [
+          "Acoes"
+        ],
+        "summary": "Atualiza uma ação",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da ação a atualizar",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Dados a serem atualizados",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Acao.Update.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Acao.Update.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Acao.Update.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Acao.Update.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ação atualizada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Acao.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Acao.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Acao.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ação não encontrada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Um ou mais parâmetros estão ausentes ou incorretos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Acoes"
+        ],
+        "summary": "Exclui uma ação",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da ação a ser excluída",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ação excluída",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.Acao.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.Acao.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.Acao.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ação não encontrada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Auth.Login.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Auth.Login.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Auth.Login.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Auth.Login.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Auth.Login.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Auth.Login.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Auth.Login.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Consumos": {
+      "get": {
+        "tags": [
+          "Consumos"
+        ],
+        "summary": "Lista todas os consumos",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uma lista de consumos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.Consumo.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.Consumo.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.Consumo.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Consumos"
+        ],
+        "summary": "Cria um consumo",
+        "requestBody": {
+          "description": "Dados do consumo",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Consumo.Create.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Consumo.Create.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Consumo.Create.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Consumo.Create.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Retorna o consumo criada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Consumo.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Consumo.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Consumo.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Um ou mais parâmetros estão ausentes ou incorretos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Consumos/{id}": {
+      "put": {
+        "tags": [
+          "Consumos"
+        ],
+        "summary": "Atualiza um consumo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do consumo a atualizar",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Dados a serem atualizados",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Consumo.Update.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Consumo.Update.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Consumo.Update.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Consumo.Update.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Consumo atualizada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Consumo.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Consumo.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Consumo.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Consumo não encontrada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Um ou mais parâmetros estão ausentes ou incorretos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Consumos"
+        ],
+        "summary": "Exclui uma consumo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do consumo a ser excluída",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consumo excluída",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.Consumo.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.Consumo.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.Consumo.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Consumo não encontrada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Empresas": {
+      "get": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Lista todas as empresas",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uma lista de empresas",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.Empresa.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.Empresa.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.Empresa.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Cria uma empresa",
+        "requestBody": {
+          "description": "Dados da empresa",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Empresa.Create.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Empresa.Create.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Empresa.Create.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Empresa.Create.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Retorna a empresa criada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Empresa.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Empresa.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Empresa.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Um ou mais parâmetros estão ausentes ou incorretos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Empresas/{id}": {
+      "put": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Atualiza uma empresa",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da empresa a atualizar",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Dados a serem atualizados",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Empresa.Update.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Empresa.Update.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Empresa.Update.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Empresa.Update.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Empresa atualizada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Empresa.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Empresa.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Empresa.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Empresa não encontrada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Um ou mais parâmetros estão ausentes ou incorretos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Exclui uma empresa",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da empresa a ser excluída",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empresa excluída",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.Empresa.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.Empresa.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.Empresa.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Empresa não encontrada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Unidades": {
+      "get": {
+        "tags": [
+          "Unidades"
+        ],
+        "summary": "Lista todas as unidades",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uma lista de unidades",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.Unidade.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.Unidade.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.Unidade.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Unidades"
+        ],
+        "summary": "Cria uma unidade",
+        "requestBody": {
+          "description": "Dados da unidade",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Unidade.Create.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Unidade.Create.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Unidade.Create.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Unidade.Create.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Retorna a unidade criada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Unidade.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Unidade.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Unidade.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Um ou mais parâmetros estão ausentes ou incorretos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Unidades/{id}": {
+      "put": {
+        "tags": [
+          "Unidades"
+        ],
+        "summary": "Atualiza uma unidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da unidade a atualizar",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Dados a serem atualizados",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Unidade.Update.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Unidade.Update.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Unidade.Update.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.Unidade.Update.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Unidade atualizada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Unidade.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Unidade.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.Unidade.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unidade não encontrada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Um ou mais parâmetros estão ausentes ou incorretos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Unidades"
+        ],
+        "summary": "Exclui uma unidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da unidade a ser excluída",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Unidade excluída",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.Unidade.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.Unidade.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.Unidade.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unidade não encontrada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Unidades/MoreEfficient": {
+      "get": {
+        "tags": [
+          "Unidades"
+        ],
+        "summary": "Lista unidades com maior eficiência energética, baseado em área e último consumo",
+        "responses": {
+          "200": {
+            "description": "Uma lista com 3 unidades e seus respectivos últimos consumos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[System.Collections.Generic.List`1[[Application.Unidade.MoreEfficient.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[System.Collections.Generic.List`1[[Application.Unidade.MoreEfficient.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[System.Collections.Generic.List`1[[Application.Unidade.MoreEfficient.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Unidades/LessEfficient": {
+      "get": {
+        "tags": [
+          "Unidades"
+        ],
+        "summary": "Lista unidades com menor eficiência energética, baseado em área e último consumo",
+        "responses": {
+          "200": {
+            "description": "Uma lista com 3 unidades e seus respectivos últimos consumos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[System.Collections.Generic.List`1[[Application.Unidade.LessEfficient.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[System.Collections.Generic.List`1[[Application.Unidade.LessEfficient.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[System.Collections.Generic.List`1[[Application.Unidade.LessEfficient.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UnidadesAcoes": {
+      "get": {
+        "tags": [
+          "UnidadesAcoes"
+        ],
+        "summary": "Lista todas as unidadesAções",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uma lista de unidadeAcaos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.UnidadeAcao.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.UnidadeAcao.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.UnidadeAcao.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UnidadesAcoes"
+        ],
+        "summary": "Cria uma unidadeAção",
+        "requestBody": {
+          "description": "Dados da unidadeAção",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.UnidadeAcao.Create.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.UnidadeAcao.Create.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.UnidadeAcao.Create.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.UnidadeAcao.Create.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Retorna a unidadeAção criada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.UnidadeAcao.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.UnidadeAcao.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.UnidadeAcao.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Um ou mais parâmetros estão ausentes ou incorretos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UnidadesAcoes/{id}": {
+      "put": {
+        "tags": [
+          "UnidadesAcoes"
+        ],
+        "summary": "Atualiza uma unidadeAção",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da unidadeAção a atualizar",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Dados a serem atualizados",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.UnidadeAcao.Update.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.UnidadeAcao.Update.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.UnidadeAcao.Update.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.UnidadeAcao.Update.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "UnidadeAção atualizada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.UnidadeAcao.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.UnidadeAcao.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.UnidadeAcao.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "UnidadeAção não encontrada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Um ou mais parâmetros estão ausentes ou incorretos",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UnidadesAcoes"
+        ],
+        "summary": "Exclui uma unidadeAção",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da unidadeAção a ser excluída",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "unidadeAção excluída",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.UnidadeAcao.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.UnidadeAcao.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.UnidadeAcao.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "unidadeAção não encontrada",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "List all users",
+        "responses": {
+          "200": {
+            "description": "A user list",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.User.ListAll.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.User.ListAll.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.PaginatedResponse`1[[Application.User.ListAll.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Creates a user",
+        "requestBody": {
+          "description": "User data",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.User.Create.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.User.Create.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.User.Create.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.User.Create.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Returns the newly created user",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.User.Create.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.User.Create.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.User.Create.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "One or more parameters are missing or wrong",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/{id}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.User.Update.Request"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.User.Update.Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.User.Update.Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Application.User.Update.Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.User.Update.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.User.Update.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.DataResponse`1[[Application.User.Update.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.ErrorListResponse`1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.User.Delete.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.User.Delete.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1[[Application.User.Delete.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application.SeedWork.Responses.NoDataResponse`1"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Application.Acao.Create.Request": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Acao.Create.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Acao.ListAll.UnidadeAcaoViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "dataImplantacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "idAcao": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Acao.ListAll.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "unidadesAcoes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application.Acao.ListAll.UnidadeAcaoViewModel"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Acao.Update.Request": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Acao.Update.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Auth.Login.Request": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Auth.Login.Response": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Consumo.Create.Request": {
+        "type": "object",
+        "properties": {
+          "dataReferencia": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "consumoTotal": {
+            "type": "number",
+            "format": "float"
+          },
+          "tipoFonte": {
+            "type": "string",
+            "nullable": true
+          },
+          "eRenovavel": {
+            "type": "boolean"
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Consumo.Create.UnidadeViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "inicioOperacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idEmpresa": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Consumo.Create.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "dataReferencia": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "consumoTotal": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "tipoFonte": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "eRenovavel": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "unidadeViewModel": {
+            "$ref": "#/components/schemas/Application.Consumo.Create.UnidadeViewModel"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Consumo.ListAll.UnidadeViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "inicioOperacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idEmpresa": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Consumo.ListAll.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "dataReferencia": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "consumoTotal": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "tipoFonte": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "eRenovavel": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "unidade": {
+            "$ref": "#/components/schemas/Application.Consumo.ListAll.UnidadeViewModel"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Consumo.Update.Request": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "dataReferencia": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "consumoTotal": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "tipoFonte": {
+            "type": "string",
+            "nullable": true
+          },
+          "eRenovavel": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Consumo.Update.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "dataReferencia": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "consumoTotal": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "tipoFonte": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "eRenovavel": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Empresa.Create.Request": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "cnpj": {
+            "type": "string",
+            "nullable": true
+          },
+          "segmento": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Empresa.Create.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "cnpj": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "segmento": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Empresa.ListAll.UnidadeViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "inicioOperacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idEmpresa": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Empresa.ListAll.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "cnpj": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "segmento": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "unidades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application.Empresa.ListAll.UnidadeViewModel"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Empresa.Update.Request": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "cnpj": {
+            "type": "string",
+            "nullable": true
+          },
+          "segmento": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Empresa.Update.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "cnpj": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "segmento": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.Acao.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.Acao.Create.ViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.Acao.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.Acao.Update.ViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.Auth.Login.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.Auth.Login.Response"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.Consumo.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.Consumo.Create.ViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.Consumo.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.Consumo.Update.ViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.Empresa.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.Empresa.Create.ViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.Empresa.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.Empresa.Update.ViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.Unidade.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.Unidade.Create.ViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.Unidade.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.Unidade.Update.ViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.UnidadeAcao.Create.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.UnidadeAcao.Create.ViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.UnidadeAcao.Update.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.UnidadeAcao.Update.ViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.User.Create.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.User.Create.Response"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[Application.User.Update.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Application.User.Update.Response"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[System.Collections.Generic.List`1[[Application.Unidade.LessEfficient.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application.Unidade.LessEfficient.ViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.DataResponse`1[[System.Collections.Generic.List`1[[Application.Unidade.MoreEfficient.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application.Unidade.MoreEfficient.ViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.ErrorListResponse`1": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.NoDataResponse`1": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.NoDataResponse`1[[Application.Acao.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.NoDataResponse`1[[Application.Consumo.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.NoDataResponse`1[[Application.Empresa.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.NoDataResponse`1[[Application.Unidade.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.NoDataResponse`1[[Application.UnidadeAcao.Delete.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.NoDataResponse`1[[Application.User.Delete.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.PaginatedResponse`1[[Application.Acao.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application.Acao.ListAll.ViewModel"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.PaginatedResponse`1[[Application.Consumo.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application.Consumo.ListAll.ViewModel"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.PaginatedResponse`1[[Application.Empresa.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application.Empresa.ListAll.ViewModel"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.PaginatedResponse`1[[Application.Unidade.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application.Unidade.ListAll.ViewModel"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.PaginatedResponse`1[[Application.UnidadeAcao.ListAll.ViewModel, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application.UnidadeAcao.ListAll.ViewModel"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.SeedWork.Responses.PaginatedResponse`1[[Application.User.ListAll.Response, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application.User.ListAll.Response"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Unidade.Create.Request": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "area": {
+            "type": "number",
+            "format": "float"
+          },
+          "inicioOperacao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "idEmpresa": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Unidade.Create.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "inicioOperacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idEmpresa": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Unidade.LessEfficient.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "inicioOperacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idEmpresa": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "ultimoConsumo": {
+            "$ref": "#/components/schemas/Core.Consumo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Unidade.ListAll.ConsumoViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "dataReferencia": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "consumoTotal": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "tipoFonte": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "eRenovavel": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "idConsumo": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Unidade.ListAll.EmpresaViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "cnpj": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "segmento": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Unidade.ListAll.UnidadeAcaoViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "dataImplantacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "idAcao": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Unidade.ListAll.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "inicioOperacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idEmpresa": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Application.Unidade.ListAll.EmpresaViewModel"
+          },
+          "unidadesAcoes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application.Unidade.ListAll.UnidadeAcaoViewModel"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "consumos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application.Unidade.ListAll.ConsumoViewModel"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Unidade.MoreEfficient.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "inicioOperacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idEmpresa": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "ultimoConsumo": {
+            "$ref": "#/components/schemas/Core.Consumo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Unidade.Update.Request": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "area": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "inicioOperacao": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "idEmpresa": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.Unidade.Update.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "inicioOperacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idEmpresa": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.UnidadeAcao.Create.Request": {
+        "type": "object",
+        "properties": {
+          "dataImplantacao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "idAcao": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.UnidadeAcao.Create.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "dataImplantacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "idAcao": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.UnidadeAcao.ListAll.AcaoViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.UnidadeAcao.ListAll.UnidadeViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "inicioOperacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idEmpresa": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.UnidadeAcao.ListAll.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "dataImplantacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "idAcao": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "unidade": {
+            "$ref": "#/components/schemas/Application.UnidadeAcao.ListAll.UnidadeViewModel"
+          },
+          "acao": {
+            "$ref": "#/components/schemas/Application.UnidadeAcao.ListAll.AcaoViewModel"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.UnidadeAcao.Update.Request": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "dataImplantacao": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "idAcao": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.UnidadeAcao.Update.ViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "dataImplantacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "idAcao": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.User.Create.Request": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.User.Create.Response": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.User.ListAll.Response": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.User.Update.Request": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Application.User.Update.Response": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Core.Acao": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "unidadesAcoes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Core.UnidadeAcao"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Core.Consumo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true
+          },
+          "dataReferencia": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "consumoTotal": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "tipoFonte": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "eRenovavel": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "unidade": {
+            "$ref": "#/components/schemas/Core.Unidade"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Core.Empresa": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "cnpj": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "segmento": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "unidades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Core.Unidade"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Core.Unidade": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          },
+          "inicioOperacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idEmpresa": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/Core.Empresa"
+          },
+          "unidadesAcoes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Core.UnidadeAcao"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "consumos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Core.Consumo"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Core.UnidadeAcao": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true
+          },
+          "dataImplantacao": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "idUnidade": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "unidade": {
+            "$ref": "#/components/schemas/Core.Unidade"
+          },
+          "idAcao": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "acao": {
+            "$ref": "#/components/schemas/Core.Acao"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorItem": {
+        "type": "object",
+        "properties": {
+          "propertyName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
