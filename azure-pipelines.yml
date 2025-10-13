@@ -1,27 +1,44 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+# azure-pipelines.yml - Versão correta para construir com Docker Compose
 
 trigger:
-- main  # ou master, dependendo do seu branch
+- main
 
 pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  imageName: 'Cap7'        # nome da imagem
-  tag: '$(Build.BuildId)'    # tag única por build
+  # ATENÇÃO: Altere estes valores!
+  dockerRegistryServiceConnection: 'sua-conexao-acr' # O nome da sua Conexão de Serviço para o ACR
+  containerRegistry: 'seu-registro.azurecr.io'      # O endereço do seu ACR
+  dockerComposeFile: 'docker-compose.yml'
+  tag: '$(Build.BuildId)'
 
-steps:
-- checkout: self
+stages:
+- stage: Build
+  displayName: 'Build e Push com Docker Compose'
+  jobs:
+  - job: BuildAndPush
+    displayName: 'Build and Push Job'
+    steps:
 
-- task: Docker@2
-  displayName: 'Build e Push da imagem Docker'
-  inputs:
-    command: 'buildAndPush'
-    containerRegistry: 'Thot Academy'  # nome configurado no Azure DevOps
-    repository: '$(imageName)'
-    dockerfile: 'API/Dockerfile'                # ou o caminho exato: 'app/Dockerfile'
-    tags: |
-      $(tag)
-      latest
+    # Passo 1: Construir todas as imagens definidas no docker-compose.yml
+    # A ação 'Build services' executa o comando 'docker-compose build'
+    - task: DockerCompose@0
+      displayName: 'Build dos serviços'
+      inputs:
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'sua-conexao-azure-resource' # Conexão de Serviço do tipo Azure Resource Manager
+        azureContainerRegistry: $(containerRegistry)
+        dockerComposeFile: $(dockerComposeFile)
+        action: 'Build services'
+
+    # Passo 2: Enviar as imagens construídas para o seu ACR
+    # A ação 'Push services' executa 'docker-compose push'
+    - task: DockerCompose@0
+      displayName: 'Push dos serviços para o ACR'
+      inputs:
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'sua-conexao-azure-resource'
+        azureContainerRegistry: $(containerRegistry)
+        dockerComposeFile: $(dockerComposeFile)
+        action: 'Push services'
