@@ -13,7 +13,7 @@ COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
 COPY ["Core/Core.csproj", "Core/"]
 RUN dotnet restore "API/API.csproj"
 COPY . .
-WORKDIR "/src/API"
+WORKDIR "/API"
 RUN dotnet build "API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
