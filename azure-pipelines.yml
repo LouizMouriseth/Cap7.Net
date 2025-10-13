@@ -3,27 +3,25 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- main
+- main  # ou master, dependendo do seu branch
 
-resources:
-- repo: self
+pool:
+  vmImage: 'ubuntu-latest'
 
 variables:
-  tag: '$(Build.BuildId)'
+  imageName: 'Cap7'        # nome da imagem
+  tag: '$(Build.BuildId)'    # tag única por build
 
-stages:
-- stage: Build
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/API/Dockerfile'
-        tags: |
-          $(tag)
+steps:
+- checkout: self
+
+- task: Docker@2
+  displayName: 'Build e Push da imagem Docker'
+  inputs:
+    command: 'buildAndPush'
+    containerRegistry: 'Thot Academy'  # nome configurado no Azure DevOps
+    repository: '$(imageName)'
+    dockerfile: 'API/Dockerfile'                # ou o caminho exato: 'app/Dockerfile'
+    tags: |
+      $(tag)
+      latest
