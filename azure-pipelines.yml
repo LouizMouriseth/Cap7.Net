@@ -6,6 +6,8 @@ trigger:
 - main  # ou master, dependendo do seu branch
 
 pool:
+ vmImage: 'ubuntu-latest'
+ container: mcr.microsoft.com/dotnet/sdk:9.0
   name: Default
   demands:
     - Agent.Name -equals Agente-Local
