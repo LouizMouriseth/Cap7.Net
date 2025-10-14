@@ -19,7 +19,7 @@ steps:
   displayName: 'Build e Push da imagem Docker'
   inputs:
     command: 'buildAndPush'
-    containerRegistry: 'ACR-Thot'  # nome configurado no Azure DevOps
+    containerRegistry: 'ACR-Thot-Registry'  # nome configurado no Azure DevOps
     repository: '$(imageName)'
     dockerfile: 'API/Dockerfile'                # ou o caminho exato: 'app/Dockerfile'
     tags: |
