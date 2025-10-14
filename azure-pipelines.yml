@@ -23,7 +23,8 @@ steps:
     command: 'buildAndPush'
     containerRegistry: 'ACR-Thot-Registry'  # nome configurado no Azure DevOps
     repository: '$(imageName)'
-    dockerfile: 'API/Dockerfile'                # ou o caminho exato: 'app/Dockerfile'
+    dockerfile: 'API/Dockerfile'
+    buildContext: '.'
     tags: |
       $(tag)
       latest
