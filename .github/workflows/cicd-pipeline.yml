@@ -1,0 +1,118 @@
+
+name: .NET CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  
+  workflow_dispatch:
+
+env:
+  SOLUTION_FILE_PATH: .
+  PROJECT_API_PATH: API/API.csproj
+  DOTNET_VERSION: '9.0.x'
+
+jobs:
+  build-e-test:
+    name: Build, Test e Push da Imagem Docker
+    runs-on: ubuntu-latest
+   
+    services:
+      mssql:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        env:
+          ACCEPT_EULA: "Y"
+          SA_PASSWORD: "yourStrong(!)Password"
+        ports:
+          - 1433:1433
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+     
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restaurar dependências
+        run: dotnet restore ${{ env.SOLUTION_FILE_PATH }}
+
+     
+      - name: Build do projeto
+        run: dotnet build ${{ env.SOLUTION_FILE_PATH }} --configuration Release --no-restore
+
+      - name: Executar testes
+        run: dotnet test ${{ env.SOLUTION_FILE_PATH }} --no-build --verbosity normal
+        env:
+          ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=TestDB;User=sa;Password=yourStrong(!)Password;"
+     
+      - name: Login no registo de containers do GitHub
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build e Push da imagem Docker
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: API/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
+
+  deploy-staging:
+    name: Deploy para Staging
+    needs: build-e-test
+    runs-on: ubuntu-latest
+    
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    environment:
+      name: staging
+      url: ${{ secrets.STAGING_URL }}
+
+    steps:
+      - name: Deploy para Staging
+        run: |
+          echo "Iniciando o deploy para o ambiente de Staging..."
+          echo "A imagem a ser implementada é: ghcr.io/${{ github.repository }}:${{ github.sha }}"
+          echo "Deploy para Staging concluído com sucesso!"
+
+ 
+ 
+ 
+  deploy-production:
+    name: Deploy para Produção
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    
+   
+    if: github.event_name == 'workflow_dispatch'
+
+   
+    environment:
+      name: production
+      url: ${{ secrets.PRODUCTION_URL }}
+
+    steps:
+      - name: Deploy para Produção
+        run: |
+          echo "Iniciando o deploy para o ambiente de Produção..."
+          echo "A imagem a ser implementada é: ghcr.io/${{ github.repository }}:${{ github.sha }}"
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+          echo "Deploy para Produção concluído com sucesso!"
