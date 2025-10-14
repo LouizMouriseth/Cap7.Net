@@ -1,0 +1,64 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  imageName: 'meuapp'
+  registry: 'docker.io/sa'   # ou docker.io/meuusuario
+  tag: '$(Build.BuildId)'
+
+stages:
+  - stage: Build
+    displayName: "CI - Build da Imagem Docker"
+    jobs:
+      - job: BuildImage
+        steps:
+          - task: Docker@2
+            displayName: "Build da imagem"
+            inputs:
+              command: 'build'
+              repository: '$docker.io/sa/$meuapp'
+              Dockerfile: '**/Dockerfile'
+              tags: |
+                $(tag)
+                latest
+
+  - stage: Push
+    displayName: "CD - Publicar Imagem no Registry"
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - job: PushImage
+        steps:
+          - task: Docker@2
+            displayName: "sa"
+            inputs:
+              command: 'login'
+              containerRegistry: 'ConexaoComRegistry'  # configurada no DevOps
+          - task: Docker@2
+            displayName: "Fazer push da imagem"
+            inputs:
+              command: 'push'
+              repository: '$docker.io/sa/$meuapp'
+              tags: |
+                $(tag)
+                latest
+
+  - stage: Deploy
+    displayName: "CD - Deploy automático"
+    dependsOn: Push
+    condition: succeeded()
+    jobs:
+      - job: Deploy
+        steps:
+          - script: |
+              echo "Fazendo deploy da imagem Docker..."
+              # Exemplo: atualizar container no App Service ou em uma VM
+              # az webapp config container set --name meuapp --resource-group meuRG \
+              #   --docker-custom-image-name $(registry)/$(imageName):latest \
+              #   --docker-registry-server-url https://$(registry)
+            displayName: "Deploy da imagem"
