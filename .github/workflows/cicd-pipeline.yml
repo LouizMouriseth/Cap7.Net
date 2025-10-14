@@ -5,19 +5,13 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch:
 
 env:
-  SOLUTION_FILE_PATH: .
-  PROJECT_API_PATH: API/API.csproj
-  DOTNET_VERSION: '9.0.x'
-  # Variáveis para os nomes dos recursos no Azure
-  AZURE_STAGING_APP_NAME: app-consumoenergia-staging # <-- Mude se usou outro nome
-  AZURE_PRODUCTION_APP_NAME: app-consumoenergia-prod # <-- Mude se usou outro nome
+  AZURE_WEBAPP_NAME: consumoenergia
 
 jobs:
-  build-e-test:
-    name: Build, Test e Push da Imagem Docker
+  build-and-test:
+    name: Build, Test & Push Docker Image
     runs-on: ubuntu-latest
     services:
       mssql:
@@ -29,72 +23,54 @@ jobs:
           - 1433:1433
 
     steps:
-      - name: Checkout do código
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup .NET
+      - name: Setup .NET 9
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: '9.0.x'
 
-      - name: Restaurar dependências
-        run: dotnet restore ${{ env.SOLUTION_FILE_PATH }}
+      - name: Restore dependencies
+        run: dotnet restore
 
-      - name: Build do projeto
-        run: dotnet build ${{ env.SOLUTION_FILE_PATH }} --configuration Release --no-restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
 
-      - name: Executar testes
-        run: dotnet test ${{ env.SOLUTION_FILE_PATH }} --no-build --verbosity normal
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
         env:
+          CONTAINER_ENVIRONMENT: "true"
           ConnectionStrings__Container: "Data Source=mssql;Initial Catalog=consumoenergia;TrustServerCertificate=true;User Id=sa;Password=SenhaBanco!1;"
 
-      - name: Login no GitHub Container Registry (GHCR)
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build e Push da imagem Docker
+      - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: API/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_lower }}:${{ github.sha }}
-        # Usar github.repository_lower para garantir que o nome da imagem está em minúsculas
-        id: docker_build
-
-  deploy-staging:
-    name: Deploy para Staging
-    needs: build-e-test
+          tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ github.sha }}
+          
+  deploy-to-azure:
+    name: Deploy to Azure
+    needs: build-and-test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     environment:
-      name: staging
-      url: https://${{ env.AZURE_STAGING_APP_NAME }}.azurewebsites.net
-
-    steps:
-      - name: Deploy no Azure Web App para Staging
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: ${{ env.AZURE_STAGING_APP_NAME }}
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_STAGING }}
-          images: ghcr.io/${{ github.repository_lower }}:${{ github.sha }}
-
-  deploy-production:
-    name: Deploy para Produção
-    needs: deploy-staging
-    runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'
-    environment:
       name: production
-      url: https://${{ env.AZURE_PRODUCTION_APP_NAME }}.azurewebsites.net
+      url: https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net
 
     steps:
-      - name: Deploy no Azure Web App para Produção
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ env.AZURE_PRODUCTION_APP_NAME }}
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_PRODUCTION }}
-          images: ghcr.io/${{ github.repository_lower }}:${{ github.sha }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          images: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ github.sha }}
