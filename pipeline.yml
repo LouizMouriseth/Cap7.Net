@@ -1,64 +1,79 @@
+# Define o gatilho da pipeline: será executada para qualquer push na branch 'main'
 trigger:
   branches:
     include:
       - main
 
+# Define o tipo de máquina virtual que a Microsoft vai fornecer para executar a pipeline
 pool:
   vmImage: 'ubuntu-latest'
 
+# Variáveis que podem ser reutilizadas em toda a pipeline
 variables:
-  imageName: 'meuapp'
-  registry: 'docker.io/sa'   # ou docker.io/meuusuario
-  tag: '$(Build.BuildId)'
+  imageName: 'ener-api'  # CORREÇÃO: Mudei para um nome mais específico do seu compose
+  registry: 'docker.io/lucas11l' # ATENÇÃO: Altere para o seu usuário do Docker Hub
+  tag: '$(Build.BuildId)' # Usa o ID do build como tag. Ex: 20231027.1
 
 stages:
-  - stage: Build
-    displayName: "CI - Build da Imagem Docker"
-    jobs:
-      - job: BuildImage
-        steps:
-          - task: Docker@2
-            displayName: "Build da imagem"
-            inputs:
-              command: 'build'
-              repository: '$docker.io/sa/$meuapp'
-              Dockerfile: '**/Dockerfile'
-              tags: |
-                $(tag)
-                latest
+# 1º Estágio: Construir a imagem Docker da API
+- stage: Build
+  displayName: "CI - Build da Imagem Docker"
+  jobs:
+    - job: BuildImage
+      steps:
+      # Tarefa para interagir com o Docker
+      - task: Docker@2
+        displayName: "Build da imagem da API"
+        inputs:
+          command: 'build'
+          # CORREÇÃO 1: Sintaxe de variáveis corrigida
+          repository: '$(registry)/$(imageName)'
+          # CORREÇÃO 2: Caminho do Dockerfile especificado
+          Dockerfile: 'src/API/Dockerfile'
+          tags: |
+            $(tag)
+            latest
 
-  - stage: Push
-    displayName: "CD - Publicar Imagem no Registry"
-    dependsOn: Build
-    condition: succeeded()
-    jobs:
-      - job: PushImage
-        steps:
-          - task: Docker@2
-            displayName: "sa"
-            inputs:
-              command: 'login'
-              containerRegistry: 'ConexaoComRegistry'  # configurada no DevOps
-          - task: Docker@2
-            displayName: "Fazer push da imagem"
-            inputs:
-              command: 'push'
-              repository: '$docker.io/sa/$meuapp'
-              tags: |
-                $(tag)
-                latest
+# 2º Estágio: Publicar a imagem no Docker Hub
+- stage: Push
+  displayName: "CD - Publicar Imagem no Registry"
+  dependsOn: Build # Só executa se o stage 'Build' for bem-sucedido
+  condition: succeeded()
+  jobs:
+    - job: PushImage
+      steps:
+      # Primeiro, faz login no seu registo de contentores (Docker Hub, etc.)
+      - task: Docker@2
+        displayName: "Login no Docker Hub"
+        inputs:
+          command: 'login'
+          # 'ConexaoComRegistry' deve ser o nome da sua "Service Connection" no Azure DevOps
+          containerRegistry: 'ConexaoComRegistry'
+      
+      # Depois, envia (push) a imagem que foi construída no stage anterior
+      - task: Docker@2
+        displayName: "Fazer push da imagem"
+        inputs:
+          command: 'push'
+          # CORREÇÃO 1: Sintaxe de variáveis corrigida
+          repository: '$(registry)/$(imageName)'
+          tags: |
+            $(tag)
+            latest
 
-  - stage: Deploy
-    displayName: "CD - Deploy automático"
-    dependsOn: Push
-    condition: succeeded()
-    jobs:
-      - job: Deploy
-        steps:
-          - script: |
-              echo "Fazendo deploy da imagem Docker..."
-              # Exemplo: atualizar container no App Service ou em uma VM
-              # az webapp config container set --name meuapp --resource-group meuRG \
-              #   --docker-custom-image-name $(registry)/$(imageName):latest \
-              #   --docker-registry-server-url https://$(registry)
-            displayName: "Deploy da imagem"
+# 3º Estágio: Fazer o deploy da imagem num serviço de nuvem
+- stage: Deploy
+  displayName: "CD - Deploy automático"
+  dependsOn: Push # Só executa se o stage 'Push' for bem-sucedido
+  condition: succeeded()
+  jobs:
+    - job: Deploy
+      steps:
+      # Este é um script de exemplo. Você precisa substituir pelo seu comando real de deploy.
+      - script: |
+          echo "Fazendo deploy da imagem $(registry)/$(imageName):latest..."
+          # Exemplo para atualizar um Azure App Service:
+          # az webapp config container set --name meu-app-service --resource-group meu-grupo-recursos \
+          #   --docker-custom-image-name $(registry)/$(imageName):latest \
+          #   --docker-registry-server-url https://index.docker.io
+        displayName: "Deploy da imagem"
