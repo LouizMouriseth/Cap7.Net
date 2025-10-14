@@ -3,7 +3,7 @@ services:
   ener-api:
     container_name: ener-api
     build:
-      context: .
+      buildcontext: '.'
       dockerfile: src/API/Dockerfile
     ports:
       - "5000:5000"
