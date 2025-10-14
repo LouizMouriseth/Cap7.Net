@@ -6,8 +6,10 @@ trigger:
 - main  # ou master, dependendo do seu branch
 
 pool:
-  vmImage: 'ubuntu-latest'
-
+  name: Default
+  demands:
+    - Agent.Name -equals Agente-Local
+    
 variables:
   imageName: 'Cap7'        # nome da imagem
   tag: '$(Build.BuildId)'    # tag única por build
