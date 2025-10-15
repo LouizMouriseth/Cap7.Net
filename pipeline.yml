@@ -61,19 +61,38 @@ stages:
             $(tag)
             latest
 
-# 3º Estágio: Fazer o deploy da imagem num serviço de nuvem
+# 3º Estágio: Fazer o deploy da imagem no Azure App Service
 - stage: Deploy
-  displayName: "CD - Deploy automático"
-  dependsOn: Push # Só executa se o stage 'Push' for bem-sucedido
+  displayName: "CD - Deploy no Azure App Service"
+  dependsOn: Push
   condition: succeeded()
   jobs:
-    - job: Deploy
-      steps:
-      # Este é um script de exemplo. Você precisa substituir pelo seu comando real de deploy.
-      - script: |
-          echo "Fazendo deploy da imagem $(registry)/$(imageName):latest..."
-          # Exemplo para atualizar um Azure App Service:
-          # az webapp config container set --name meu-app-service --resource-group meu-grupo-recursos \
-          #   --docker-custom-image-name $(registry)/$(imageName):latest \
-          #   --docker-registry-server-url https://index.docker.io
-        displayName: "Deploy da imagem"
+  - job: DeployToAppService
+    displayName: "Deploy Web App"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: AzureWebAppContainer@1
+      displayName: 'Deploy da Imagem no App Service'
+      inputs:
+        azureSubscription: 'ConexaoAzure' # Nome da Service Connection
+        # MUDE AQUI: Coloque o nome do seu App Service criado na Azure
+        appName: 'ener-api-prod' # <- MUDE AQUI
+        imageName: '$(registry)/$(imageName):$(tag)'# 3º Estágio: Fazer o deploy da imagem no Azure App Service
+- stage: Deploy
+  displayName: "CD - Deploy no Azure App Service"
+  dependsOn: Push
+  condition: succeeded()
+  jobs:
+  - job: DeployToAppService
+    displayName: "Deploy Web App"
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: AzureWebAppContainer@1
+      displayName: 'Deploy da Imagem no App Service'
+      inputs:
+        azureSubscription: 'ConexaoAzure' # Nome da Service Connection
+        # MUDE AQUI: Coloque o nome do seu App Service criado na Azure
+        appName: 'ener-api-prod' # <- MUDE AQUI
+        imageName: '$(registry)/$(imageName):$(tag)'
